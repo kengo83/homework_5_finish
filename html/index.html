@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <title>eelテスト</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class='container'>
+            <div>
+                <figure class="text-center">
+                    <blockquote class="blockquote">
+                        <h1>POSシステム</h1>
+                    </blockquote>
+                    <figcaption class="blockquote-footer">
+                        レジシステム
+                    </figcaption>
+                </figure>
+                <div class="form-floating mb-3">
+                    <label for="floatingInput">商品コードを入力</label>
+                    <input type="search" class="form-control" id="code">
+                </div>
+                <div class="form-floating">
+                    <label for="floatingPassword">個数を入力</label>
+                    <input type="search" class="form-control" id="number">
+                </div>
+                <button type="button" class="btn btn-primary btn-lg" id="order_btn">追加する</button>
+                <button type="button" class="btn btn-secondary btn-lg" id="clear_btn">オールクリア</button>
+                <div class="form-floating">
+                    <textarea class="form-control" id="mytextarea" style="height: 50%" name="result"></textarea>
+                </div>
+            </div>
+            <figure class="text-center">
+                <blockquote class="blockquote">
+                    <h1>会計</h1>
+                </blockquote>
+            </figure>
+            <div class="form-floating mb-3">
+                <label for="floatingInput">支払金額を入力</label>
+                <input type="search" class="form-control" id="payment">
+                <button type="button" class="btn btn-primary btn-lg" id='payment_btn'>支払う</button>
+            </div>
+        </div>
+        <script type="text/javascript" src="./eel.js"></script>
+        <script>
+            document.getElementById("order_btn").addEventListener('click', () => {
+                eel.log_order_item(code.value,number.value)
+            })
+             
+            eel.expose(clearText)
+            function clearText() {
+	            var textForm = document.getElementById("mytextarea");
+                textForm.value = '';
+            }
+
+            eel.expose(view_log_js)
+            function view_log_js(text){
+                mytextarea.value += text + '\n'
+            }
+
+            document.getElementById("payment_btn").addEventListener('click', () => {
+                eel.payment_money(payment.value)
+            })
+
+            document.getElementById("clear_btn").addEventListener('click', () => {
+                mytextarea.value = ""
+                eel.clear_list()
+            })
+
+            eel.expose(display_alert)
+            function display_alert(text){
+                alert(text)
+            }
+        </script>
+    </body>
+</html>
